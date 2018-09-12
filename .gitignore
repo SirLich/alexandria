@@ -1,0 +1,4 @@
+__pycache__/
+webhooks.txt
+blacklist.txt
+discord_hooks.py
