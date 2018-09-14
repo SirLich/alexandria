@@ -11,13 +11,13 @@ from discord_hooks import Webhook #Credit: https://github.com/kyb3r/dhooks
 
 VERSION = 1.2
 BLACKLIST_LOCATION = "/home/liam/application_data/atom/discord/alexandria/blacklist.txt"
-WEBHOOK_URL_LIST_LOCAtion = "/home/liam/application_data/atom/discord/alexandria/webhooks.txt"
+WEBHOOK_URL_LIST_LOCATION = "/home/liam/application_data/atom/discord/alexandria/webhooks.txt"
 
 WEBHOOK_URL_LIST = []
 f=open(WEBHOOK_URL_LIST_LOCATION,'r')
 while True:
     line = f.readline()
-    if not x: break
+    if not line: break
     WEBHOOK_URL_LIST.append(line)
 
 def main():
