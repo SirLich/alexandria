@@ -9,7 +9,7 @@ alexandria is still in its infant stages, and therefore only supports the Minecr
 ## How to run:
 Not included in this repository are three vital files which must be included before the project can be run:
 
-1) A copy of which can be found here: https://github.com/kyb3r/dhooks
+1) A copy of [dhooks](https://github.com/kyb3r/dhooks).
 
 2) A blacklist.txt file. This file can be created as an empty, but will be used to store information on which news-items have already been posted.
 
