@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 
+#Libraries
 import re
 from urllib import request, parse
 import time
@@ -7,18 +8,21 @@ from bs4 import BeautifulSoup
 import time
 import datetime
 import json
+from pathlib import Path
 from discord_hooks import Webhook #Credit: https://github.com/kyb3r/dhooks
 
-VERSION = 1.2
-BLACKLIST_LOCATION = "/home/liam/application_data/atom/discord/alexandria/blacklist.txt"
-WEBHOOK_URL_LIST_LOCATION = "/home/liam/application_data/atom/discord/alexandria/webhooks.txt"
-
+#Constants
+base_path = Path(__file__).parent
+VERSION = 1.3
+BLACKLIST_LOCATION = (base_path / "blacklist.txt").resolve()
+WEBHOOK_URL_LIST_LOCATION = (base_path / "webhooks.txt").resolve()
 WEBHOOK_URL_LIST = []
 f=open(WEBHOOK_URL_LIST_LOCATION,'r')
+
 while True:
     line = f.readline()
     if not line: break
-    WEBHOOK_URL_LIST.append(line)
+    WEBHOOK_URL_LIST.append(line.strip())
 
 def main():
     print("Script version ", VERSION ," started. The time is " + str(datetime.datetime.now()))
@@ -59,6 +63,11 @@ def main():
             for cup in soup.find_all('h2', {'class':'post-excerpt-title'} ):
                 title_list.append(cup.text.replace("\n",""))
 
+            description_list.reverse()
+            url_list.reverse()
+            image_list.reverse()
+            title_list.reverse()
+
             #Handle file interactions
             file = open(BLACKLIST_LOCATION,"r")
             saved_url_list = file.read()
@@ -78,9 +87,8 @@ def main():
                     titles.write(url + "\n")
                     titles.close()
 
-                    #Post
-                    for i in range(len(WEBHOOK_URL_LIST)):
-                        webhook_url = webhook_url[i]
+                    for webhook_url in WEBHOOK_URL_LIST:
+                        print("Trying: " , webhook_url)
                         embed = Webhook(webhook_url,color=0xff0000)
 
                         embed.set_author(name=title)
@@ -89,9 +97,11 @@ def main():
                         embed.add_field(name='Link:',value='[' + title + '](' + url + ')')
                         embed.set_footer(ts=True)
 
+                        print("Before post")
                         embed.post()
+                        print("After post")
                         time.sleep(1)
-                    time.sleep(15)
+                    articles+=1;
             successful_iterations+=1
             time.sleep(300)
         except Exception as e:
