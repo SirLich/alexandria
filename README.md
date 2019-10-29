@@ -2,6 +2,9 @@
 
 alexandria is a simple mock RSS feed for discord. Each supported service is developed from scratch using Beautifull Soup and a simple discord embed library. This is to insure maximum cleanliness of the final product.
 
+## WARNING: Depracted
+The minecraft forums have gone into READ ONLY mode. This repository will therefor no longer work.
+
 ## Current support:
 
 alexandria is still in its infant stages, and therefore only supports the Minecraft Forums.
